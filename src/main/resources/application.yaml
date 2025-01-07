@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: api-data-v1
+  webflux:
+    base-path: /api/data-v1
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:/schema.sql
+  r2dbc:
+    url: r2dbc:h2:mem:///db
+    username: sa
+    password:    
+
+
+
