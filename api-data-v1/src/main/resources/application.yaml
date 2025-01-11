@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: api-data-v1
+  webflux:
+    base-path: /api/data-v1
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:/schema.sql
+  r2dbc:
+    url: r2dbc:h2:mem:///db
+    username: sa
+    password:    
+
+springdoc:
+  info:
+    version: '@project.version@'
+    title: '@project.artifactId@'
+    description: '@project.description@'
+    servers:
+      - 'http://localhost:8082/'
+      - 'http://localhost/'
+  api-docs:
+    path: /openapi
+    yaml:
+      enabled: true    
+  swagger-ui:
+    enabled: false

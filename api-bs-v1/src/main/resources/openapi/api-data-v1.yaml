@@ -1,0 +1,269 @@
+openapi: 3.0.1
+info:
+  title: api-data-v1
+  description: Api Data
+  version: 0.0.1-SNAPSHOT
+servers:
+  - url: http://localhost:8082/
+  - url: http://localhost/
+paths:
+  /user:
+    post:
+      tags:
+        - user-controller
+      operationId: save
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDataRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserDataResponse'
+  /webflux/zip:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: zipExample
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /webflux/zip-flux:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: zipFlux
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /webflux/transform:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: transformExample
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /webflux/simple-mono:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: simpleMono
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /webflux/simple-flux:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: simpleFlux
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+  /webflux/phone-processing:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: processPhones
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PhoneRequest'
+  /webflux/nested-flatmap:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: nestedFlatMap
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /webflux/flux-to-mono:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: fluxToMono
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /webflux/flatmap-examples:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: flatMapExamples
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /webflux/error-handling:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: errorHandling
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /webflux/delayed:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: delayedResponse
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /webflux/concat:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: concatExample
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /webflux/combined-flux:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: combinedFlux
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /webflux/async-processing:
+    get:
+      tags:
+        - web-flux-example-controller
+      operationId: asyncProcessing
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /hello:
+    get:
+      tags:
+        - hello-controller
+      operationId: hello
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    PhoneRequest:
+      type: object
+      properties:
+        number:
+          type: string
+        citycode:
+          type: string
+        contrycode:
+          type: string
+    UserDataRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneRequest'
+        token:
+          type: string
+    UserDataResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        modified:
+          type: string
+        lastLogin:
+          type: string
+        token:
+          type: string
+        active:
+          type: boolean
