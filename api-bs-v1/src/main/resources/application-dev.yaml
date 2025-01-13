@@ -5,3 +5,10 @@ spring:
     livereload:
       enabled: true
       port: 3574
+http-client:
+  api-data-v1:
+    base-url: http://localhost:8082/api/data-v1
+    timeout: 5000
+validation:
+  password:
+    pattern: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{8,}$

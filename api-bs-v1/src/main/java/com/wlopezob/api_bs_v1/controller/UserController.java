@@ -1,24 +1,30 @@
 package com.wlopezob.api_bs_v1.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerWebExchange;
 
-import com.wlopezob.api_bs_v1.thirdparty.api_data_v1.api.UserApi;
-import com.wlopezob.api_bs_v1.thirdparty.api_data_v1.model.UserDataRequest;
-import com.wlopezob.api_bs_v1.thirdparty.api_data_v1.model.UserDataResponse;
+import com.wlopezob.api_bs_v1.model.dto.UserBsRequest;
+import com.wlopezob.api_bs_v1.model.dto.UserBsResponse;
+import com.wlopezob.api_bs_v1.service.UserService;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RestController
-public class UserController  implements UserApi{
+@RequestMapping("/user")
+@RequiredArgsConstructor
+public class UserController {
 
-  @Override
-  public Mono<ResponseEntity<UserDataResponse>> save(@Valid Mono<UserDataRequest> userDataRequest,
-      ServerWebExchange exchange) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'save'");
+  private final UserService userService;
+
+  @PostMapping
+  public Mono<ResponseEntity<UserBsResponse>> save(@RequestBody @Valid UserBsRequest userBsRequest) {
+    return userService.saveUser(userBsRequest)
+        .map(user -> ResponseEntity.status(HttpStatus.CREATED).body(user));
   }
-
 }
