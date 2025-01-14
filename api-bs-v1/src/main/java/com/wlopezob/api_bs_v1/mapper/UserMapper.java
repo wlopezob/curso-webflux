@@ -11,11 +11,12 @@ import com.wlopezob.api_bs_v1.thirdparty.api_data_v1.model.UserDataResponse;
 @Component
 public class UserMapper {
 
-  public UserDataRequest toUserDataRequest(UserBsRequest userBsRequest) {
+  public UserDataRequest toUserDataRequest(UserBsRequest userBsRequest, String token) {
     return new UserDataRequest()
         .name(userBsRequest.getName())
         .email(userBsRequest.getEmail())
         .password(userBsRequest.getPassword())
+        .token(token)
         .phones(userBsRequest.getPhones()
             .stream()
             .map(phone -> new PhoneRequest()
