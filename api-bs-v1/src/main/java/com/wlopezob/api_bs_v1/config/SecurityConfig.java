@@ -17,6 +17,7 @@ public class SecurityConfig {
     return http.csrf(csrf -> csrf.disable())
         .authorizeExchange(exchanges -> exchanges
             .pathMatchers(HttpMethod.POST, "/user").permitAll()
+            .pathMatchers(HttpMethod.GET, "/user/getkey/{key}").permitAll()
             .pathMatchers("/openapi").permitAll()
             .anyExchange().authenticated()
         )

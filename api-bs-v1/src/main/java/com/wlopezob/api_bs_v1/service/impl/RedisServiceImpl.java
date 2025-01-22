@@ -20,4 +20,10 @@ public class RedisServiceImpl implements RedisService {
       .then(Mono.just(value));
   }
 
+  @Override
+  public <T> Mono<T> get(String key, Class<T> type) {
+    return reactiveRedisTemplate.opsForValue().get(key)
+      .cast(type);
+  }
+
 }
